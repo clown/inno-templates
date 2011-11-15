@@ -160,6 +160,9 @@ Name: {app}; Type: dirifempty
 ;  CustomMessages
 ; --------------------------------------------------------------------------- ;
 [CustomMessages]
+japanese.KillProc=プログラムが実行中です。インストールを続行するためには、プログラムを終了させる必要があります。プログラムを終了させますか？
+japanese.DotNetNotFound=お使いのコンピュータにMicrosoft .Net Frameworkがインストールされていません。インストール後に再実行して下さい。今すぐMicosoft .Net Frameworkのダウンロードページへ移動しますか？
+japanese.DotNetURL=http://www.microsoft.com/downloads/ja-jp/details.aspx?FamilyId=0856eacb-4362-4b0d-8edd-aab15c5e04f5
 
 ; --------------------------------------------------------------------------- ;
 ;  Code
@@ -184,15 +187,11 @@ Name: {app}; Type: dirifempty
 function InitializeSetup(): Boolean;
 var
     err: Integer;
-    url: String;
-    msg: String;
 begin
     // インストールするアプリケーションが Microsoft .NET Framework が必要な場合
-    url := 'http://www.microsoft.com/downloads/ja-jp/details.aspx?FamilyId=0856eacb-4362-4b0d-8edd-aab15c5e04f5';
-    msg := 'お使いのコンピュータにMicrosoft .Net Frameworkがインストールされていません。インストール後に再実行して下さい。今すぐMicosoft .Net Frameworkのダウンロードページへ移動しますか？';
     if (not IsDotNetDetected('v2.0', 0)) then begin
-        if (MsgBox(msg, mbConfirmation, MB_YESNO) = IDYES) then begin
-            ShellExec('open', url, '', '', SW_SHOW, ewNoWait, err);
+        if (MsgBox(CustomMessage('DotNetNotFound'), mbConfirmation, MB_YESNO) = IDYES) then begin
+            ShellExec('open', CustomMessage('DotNetURL'), '', '', SW_SHOW, ewNoWait, err);
         end;
         Result := false;
         exit;

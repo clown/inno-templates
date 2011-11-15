@@ -1,6 +1,6 @@
 // ------------------------------------------------------------------------- //
 //
-//  cubepdf-utility.iss
+//  process.iss
 //
 //  Copyright (c) 2011 clown.
 //
@@ -30,13 +30,8 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 // ------------------------------------------------------------------------- //
-#ifndef CUBESOFT_PROCESS_ISS
-#define CUBESOFT_PROCESS_ISS
-
-#ifndef MESSAGE_PROCESS_LOCK
-#define MESSAGE_PROCESS_LOCK \
-    "プログラムが実行中です。インストールを続行するためには、プログラムを終了させる必要があります。プログラムを終了させますか？"
-#endif
+#ifndef INNO_TEMPLATES_PROCESS_ISS
+#define INNO_TEMPLATES_PROCESS_ISS
 
 // ------------------------------------------------------------------------- //
 //  Type definitions
@@ -101,6 +96,9 @@ external 'TerminateProcess@kernel32.dll stdcall';
 //  confirm に true が指定された場合は，終了させるかどうかを尋ねる
 //  メッセージボックスを表示する．
 //
+//  NOTE: メッセージ内容は，[CustomMessage] セクションで KillProc と言う
+//  名前で設定する．
+//
 // ------------------------------------------------------------------------- //
 function KillProc(name: String; confirm: Boolean): Boolean;
 var
@@ -131,7 +129,7 @@ begin
                 filename := ExtractFileName(Copy(buffer, 1, last - 1));
                 if (LowerCase(filename) = LowerCase(name)) then begin
                     found := true;
-                    if ((not confirm) or (MsgBox('{#MESSAGE_PROCESS_LOCK}', mbConfirmation, MB_YESNO) = IDYES)) then TerminateProcess(process, 0)
+                    if ((not confirm) or (MsgBox(CustomMessage('KillProc'), mbConfirmation, MB_YESNO) = IDYES)) then TerminateProcess(process, 0)
                     else begin
                         Result := false;
                         CloseHandle(process);
@@ -145,4 +143,4 @@ begin
     Result := true;
 end;
 
-#endif // CUBESOFT_PROCESS_ISS
+#endif // INNO_TEMPLATES_PROCESS_ISS
