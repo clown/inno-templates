@@ -1,0 +1,183 @@
+; --------------------------------------------------------------------------- ;
+;
+;  inno-templates
+;
+;  Copyright (c) 2011 clown.
+;
+;  Redistribution and use in source and binary forms, with or without
+;  modification, are permitted provided that the following conditions
+;  are met:
+;
+;    - Redistributions of source code must retain the above copyright
+;      notice, this list of conditions and the following disclaimer.
+;    - Redistributions in binary form must reproduce the above copyright
+;      notice, this list of conditions and the following disclaimer in the
+;      documentation and/or other materials provided with the distribution.
+;    - No names of its contributors may be used to endorse or promote
+;      products derived from this software without specific prior written
+;      permission.
+;
+;  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+;  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+;  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+;  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+;  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+;  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+;  TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+;  PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+;  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+;  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+;  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+;  
+; --------------------------------------------------------------------------- ;
+
+■ What's this?
+
+inno-templates は，Inno Setup を使用してインストーラを作成する際によく設定する項目を
+あらかじめ定義しているテンプレート用のスクリプトファイル群です．単純なインストーラを
+作成するのであれば，適切なディレクトリ構成を作成して各種設定項目を変更するだけで
+作成する事ができます．
+
+■ ディレクトリ構成
+
+inno-templates では，以下のようなディレクトリ構成を想定しています．
+
+<ROOT_PATH>
+    + setup.iss
+    + process.iss
+    + windows.iss
+    + <RESOURCE_DIR>
+        + x86
+            + <APP_NAME>.exe
+        + x64
+            + <APP_NAME>.exe
+        + Readme.txt
+        + License.txt
+        + <APP_NAME>.ico
+
+アプリケーション本体は，x86/x64 両方のバージョンが存在するケースを想定して書かれて
+いますので，どちらか一方のエディションしか用意しない場合でも，x86/x64 のフォルダを
+作成した上で，そのフォルダにアプリケーション本体を設置して下さい．
+尚，各種テキストファイル（Readme.txt, License.txt），およびアイコン画像ファイルは
+省略する事も可能です．詳細は，「パラメータ設定」の項目で記述します．
+
+■ パラメータ設定
+
+inno-templates では，以下のパラメータが設定されています．これらは，setup.iss の上部で
+定義されており，これらを変更する事によってインストーラが作成されます．
+
+X64_INSTALL_MODE
+    必須項目です．このパラメータを 0 にすると 32bit 用のインストーラが，1 以上に
+    設定すると 64bit 用のインストーラが作成されます．
+
+GUID_VALUE
+    必須項目です．インストーラに固有の GUID を割り当てます．開発環境として InnoIDE を
+    使用している場合，「Inno Scripts」→「Insert GUID」メニューを選択する事により
+    新たな GUID を生成する事ができます．
+
+ROOT_PATH
+    必須項目です．各種スクリプトファイルやインストールするリソース群が置かれている
+    フォルダのルートとなるパスを選択します．
+
+RESOURCE_DIR
+    必須項目です．アプリケーション本体や各種テキストファイル等のリソースが格納されている
+    フォルダ名を指定します．初期値には "release" が指定されています．例えば，
+    ROOT_PATH が "C:\myproject" であった場合，setup.iss は各種リソースファイル群が
+    "C:\myproject\release\" 以下に存在すると想定します．
+
+APP_NAME
+    必須項目です．インストーラを作成するアプリケーションの名前を設定します．
+
+APP_EXE_NAME
+    必須項目です．メインとなるアプリケーションの exe 名を設定します．スクリプトファイル
+    中では {#APP_EXE_NAME}.exe と記述しています．そのため，ここで設定するファイル名は
+    ".exe" を除いた名前となります．
+    
+APP_VERSION
+    オプションです．アプリケーションのバージョンを設定します．省略する場合は，
+    パラメータ自体は削除せずに "" を設定して下さい．
+
+APP_RELEASE_YEAR
+    オプションです．アプリケーションのリリース年を設定します．スクリプトファイル内では
+    現在のところ，コピーライト表記でのみ使用しています．
+    Copyright (c) {#APP_RELEASE_YEAR} {#APP_PUBLISHER}
+    省略する場合は，パラメータ自体は削除せずに "" を設定して下さい．
+
+APP_PUBLISHER
+    必須項目です．アプリケーションの作成者の名前を設定します．
+
+APP_URL
+    必須項目です．アプリケーションの配布，または説明をしている Web ページの URL を指定します．
+    ※APP_URL を指定しない場合，[Icons] セクションの Filename: {#APP_URL} となっている行を
+    削除した後，パラメータ自体は削除せずに "" を設定して下さい．
+
+APP_LICENSE
+    オプションです．アプリケーションのライセンスが記述されているファイルのファイル名を設定します．
+    スクリプトファイル内では，このファイルは {#ROOT_PATH}\{#RESOURCE_DIR} 下に存在している
+    事を想定しています．このファイルに記述されている内容が，インストーラ実行時の
+    「使用許諾契約書の同意」のダイアログで表示されます．ファイルが存在しない場合は，
+    このパラメータを削除して下さい．
+
+APP_README
+    オプションです．アプリケーションの説明が書かれているファイルのファイル名を設定します．
+    スクリプトファイル内では，このファイルは {#ROOT_PATH}\{#RESOURCE_DIR} 下に存在している
+    事を想定しています．ここで設定されたファイルが，インストーラの最後に「Readme.txt を表示する」
+    と言った選択肢として表示されます．ファイルが存在しない場合は，このパラメータを削除して下さい．
+
+APP_ICON
+    オプションです．アプリケーションのアイコンとして使用されている画像ファイルを設定します．
+    ここで設定された画像がインストーラのアイコンとして使用されます．ファイルが存在しない場合は，
+    このパラメータを削除して下さい．
+
+■ setup.iss のデフォルトの挙動
+
+(1) ファイル関連
+
+{#APP_EXE_NAME}.exe（アプリケーション本体），および {#APP_README}（説明用のテキストファイル）が
+インストールされます．APP_README パラメータを削除した場合は，アプリケーション本体のみが
+インストールされます．
+
+(2) レジストリ関連
+
+HKEY_LOCAL_MACHINE\Software\{#APP_PUBLISHER}\{#APP_NAME} 下に以下の値が設定されます．
+- InstallDirectory：ユーザが選択したインストールフォルダ
+- Version：アプリケーションのバージョン（APP_VERSION で指定した値）
+
+(3) ショートカット関連
+
+スタートメニュの「すべてのプログラム→{#APP_PUBLISHER}→{#APP_NAME}」下に以下の
+ショートカットが設定されます．
+- アプリケーション本体：{#APP_EXE_NAME}.exe を実行するショートカット
+- Web ページへのリンク：{#APP_URL} で指定した URL を規定のブラウザで開くショートカット
+- アンインストール：アプリケーションをアンインストールするためのプログラムへのショートカット
+
+また，これとは別にデスクトップにアプリケーション本体へのショートカットを作成するかどうかの
+オプションをダイアログで表示するように設定されています．
+
+■ その他
+
+[Code] セクションにおいてもいくつかの機能をデフォルトで実装しています．
+
+(1) インストールするアプリケーションが実行しているかどうかのチェック
+
+アプリケーションをアップデートする等の理由で，既にアプリケーションがインストールされて
+いるにも関わらず，再度インストーラを実行する場合があります．そういった場合に，インストーラ
+起動時にアプリケーション本体が実行されているとインストールに失敗します．
+また，アンインストール時に置いても同じような問題が発生します．そのため，インストーラ，
+およびアンインストーラの起動直後にアプリケーションが実行されているかどうかをチェックし，
+実行されている場合は強制終了する KillProc() 関数を実装しています．
+
+(2) Microsoft .NET Framework ランタイムがインストールされているかどうかのチェック
+
+Microsoft .NET Framework を用いて開発されたアプリケーションは，インストールされる
+環境にランタイムがインストールされてある必要があります．そのため，インストーラの起動直後に
+Microsoft .NET Framework ランタイムがインストールされてあるかどうかをチェックし，
+インストールされていない場合にはエラーメッセージを表示する機能を実装しています．
+
+尚，この機能はデフォルトではコメントアウトされています．必要な場合は，InitializeSetup() 関数
+内の該当箇所のコメントアウトを解除します．
+
+■ 修正履歴
+
+2011/11/16 version 0.0.1
+- 最初の公開バージョン

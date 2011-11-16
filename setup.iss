@@ -46,7 +46,7 @@
 #define APP_EXE_NAME            "myapp"
 #define APP_VERSION             "1.0.0"
 #define APP_RELEASE_YEAR        "2011"
-#define APP_PUBLISHER           "CubeSoft"
+#define APP_PUBLISHER           "MyCompany"
 #define APP_URL                 "http://cielquis.net/"
 #define APP_LICENSE             "License.txt"
 #define APP_README              "Readme.txt"
