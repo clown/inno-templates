@@ -136,8 +136,11 @@ Root: HKLM; Subkey: Software\{#APP_PUBLISHER}\{#APP_NAME}; ValueType: string; Va
 ;  Icons
 ; --------------------------------------------------------------------------- ;
 [Icons]
+Name: {group}\{#APP_NAME}; Filename: {app}\{#APP_EXE_NAME}.exe
 Name: {group}\{cm:ProgramOnTheWeb,{#APP_NAME}}; Filename: {#APP_URL}
 Name: {group}\{cm:UninstallProgram,{#APP_NAME}}; Filename: {uninstallexe}
+Name: {commondesktop}\{#APP_NAME}; Filename: {app}\{#APP_EXE_NAME}.exe; Tasks: desktopicon
+Name: {userappdata}\Microsoft\Internet Explorer\Quick Launch\{#APP_NAME}; Filename: {app}\{#APP_EXE_NAME}.exe; Tasks: quicklaunchicon
 
 ; --------------------------------------------------------------------------- ;
 ;  UninstallDelete
@@ -150,6 +153,8 @@ Name: {app}; Type: dirifempty
 ;  Tasks
 ; --------------------------------------------------------------------------- ;
 [Tasks]
+Name: desktopicon; Description: {cm:CreateDesktopIcon}; GroupDescription: {cm:AdditionalIcons}; Flags: unchecked
+Name: quicklaunchicon; Description: {cm:CreateQuickLaunchIcon}; GroupDescription: {cm:AdditionalIcons}; Flags: unchecked; OnlyBelowVersion: 0,6.1
 
 ; --------------------------------------------------------------------------- ;
 ;  Run
@@ -189,13 +194,13 @@ var
     err: Integer;
 begin
     // インストールするアプリケーションが Microsoft .NET Framework が必要な場合
-    if (not IsDotNetDetected('v2.0', 0)) then begin
-        if (MsgBox(CustomMessage('DotNetNotFound'), mbConfirmation, MB_YESNO) = IDYES) then begin
-            ShellExec('open', CustomMessage('DotNetURL'), '', '', SW_SHOW, ewNoWait, err);
-        end;
-        Result := false;
-        exit;
-    end;
+    //if (not IsDotNetDetected('v2.0', 0)) then begin
+    //    if (MsgBox(CustomMessage('DotNetNotFound'), mbConfirmation, MB_YESNO) = IDYES) then begin
+    //        ShellExec('open', CustomMessage('DotNetURL'), '', '', SW_SHOW, ewNoWait, err);
+    //    end;
+    //    Result := false;
+    //    exit;
+    //end;
     
     // アップデートなどの理由で上書きインストールする場合，インストールする
     // アプリケーションが実行中かどうかをチェックする．他にも実行中な可能性
