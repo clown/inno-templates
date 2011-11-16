@@ -38,9 +38,9 @@ inno-templates ‚ÍCInno Setup ‚ðŽg—p‚µ‚ÄƒCƒ“ƒXƒg[ƒ‰‚ðì¬‚·‚éÛ‚É‚æ‚­Ý’è‚·‚é€
 ì¬‚·‚é‚Ì‚Å‚ ‚ê‚ÎC“KØ‚ÈƒfƒBƒŒƒNƒgƒŠ\¬‚ðì¬‚µ‚ÄŠeŽíÝ’è€–Ú‚ð•ÏX‚·‚é‚¾‚¯‚Å
 ì¬‚·‚éŽ–‚ª‚Å‚«‚Ü‚·D
 
-¡ ƒfƒBƒŒƒNƒgƒŠ\¬
+¡ ƒtƒ@ƒCƒ‹\¬
 
-inno-templates ‚Å‚ÍCˆÈ‰º‚Ì‚æ‚¤‚ÈƒfƒBƒŒƒNƒgƒŠ\¬‚ð‘z’è‚µ‚Ä‚¢‚Ü‚·D
+inno-templates ‚Å‚ÍCˆÈ‰º‚Ì‚æ‚¤‚Èƒtƒ@ƒCƒ‹\¬‚ð‘z’è‚µ‚Ä‚¢‚Ü‚·D
 
 {#ROOT_PATH}
     + setup
@@ -69,7 +69,9 @@ inno-templates ‚Å‚ÍCˆÈ‰º‚Ìƒpƒ‰ƒ[ƒ^‚ªÝ’è‚³‚ê‚Ä‚¢‚Ü‚·D‚±‚ê‚ç‚ÍCsetup.iss ‚Ì
 
 X64_INSTALL_MODE
     •K{€–Ú‚Å‚·D‚±‚Ìƒpƒ‰ƒ[ƒ^‚ð 0 ‚É‚·‚é‚Æ 32bit —p‚ÌƒCƒ“ƒXƒg[ƒ‰‚ªC1 ˆÈã‚É
-    Ý’è‚·‚é‚Æ 64bit —p‚ÌƒCƒ“ƒXƒg[ƒ‰‚ªì¬‚³‚ê‚Ü‚·D
+    Ý’è‚·‚é‚Æ 64bit —p‚ÌƒCƒ“ƒXƒg[ƒ‰‚ªì¬‚³‚ê‚Ü‚·D®Cã‹L‚Ìƒtƒ@ƒCƒ‹\¬‚ÉŠÖ˜A‚µ‚½
+    ’ˆÓŽ–€‚Æ‚µ‚ÄC0 ‚ÉÝ’è‚·‚é‚Æ x86 ƒtƒHƒ‹ƒ_ˆÈ‰º‚Ìƒtƒ@ƒCƒ‹‚ð 1 ˆÈã‚ÉÝ’è‚·‚é‚Æ
+    x64 ƒtƒHƒ‹ƒ_ˆÈ‰º‚Ìƒtƒ@ƒCƒ‹‚ðŽQÆ‚·‚é‚æ‚¤‚É‚È‚è‚Ü‚·D
 
 GUID_VALUE
     •K{€–Ú‚Å‚·DƒCƒ“ƒXƒg[ƒ‰‚ÉŒÅ—L‚Ì GUID ‚ðŠ„‚è“–‚Ä‚Ü‚·DŠJ”­ŠÂ‹«‚Æ‚µ‚Ä InnoIDE ‚ð
