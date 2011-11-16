@@ -42,18 +42,19 @@ inno-templates ‚ÍCInno Setup ‚ðŽg—p‚µ‚ÄƒCƒ“ƒXƒg[ƒ‰‚ðì¬‚·‚éÛ‚É‚æ‚­Ý’è‚·‚é€
 
 inno-templates ‚Å‚ÍCˆÈ‰º‚Ì‚æ‚¤‚ÈƒfƒBƒŒƒNƒgƒŠ\¬‚ð‘z’è‚µ‚Ä‚¢‚Ü‚·D
 
-<ROOT_PATH>
-    + setup.iss
-    + process.iss
-    + windows.iss
-    + <RESOURCE_DIR>
+{#ROOT_PATH}
+    + setup
+        - setup.iss
+        - process.iss
+        - windows.iss
+    + {#RESOURCE_DIR}
         + x86
-            + <APP_NAME>.exe
+            - {#APP_EXE_NAME}.exe
         + x64
-            + <APP_NAME>.exe
-        + Readme.txt
-        + License.txt
-        + <APP_NAME>.ico
+            - {#APP_EXE_NAME}.exe
+        - Readme.txt
+        - License.txt
+        - {#APP_EXE_NAME}.ico
 
 ƒAƒvƒŠƒP[ƒVƒ‡ƒ“–{‘Ì‚ÍCx86/x64 —¼•û‚Ìƒo[ƒWƒ‡ƒ“‚ª‘¶Ý‚·‚éƒP[ƒX‚ð‘z’è‚µ‚Ä‘‚©‚ê‚Ä
 ‚¢‚Ü‚·‚Ì‚ÅC‚Ç‚¿‚ç‚©ˆê•û‚ÌƒGƒfƒBƒVƒ‡ƒ“‚µ‚©—pˆÓ‚µ‚È‚¢ê‡‚Å‚àCx86/x64 ‚ÌƒtƒHƒ‹ƒ_‚ð
@@ -158,7 +159,7 @@ HKEY_LOCAL_MACHINE\Software\{#APP_PUBLISHER}\{#APP_NAME} ‰º‚ÉˆÈ‰º‚Ì’l‚ªÝ’è‚³‚ê‚
 
 [Code] ƒZƒNƒVƒ‡ƒ“‚É‚¨‚¢‚Ä‚à‚¢‚­‚Â‚©‚Ì‹@”\‚ðƒfƒtƒHƒ‹ƒg‚ÅŽÀ‘•‚µ‚Ä‚¢‚Ü‚·D
 
-(1) ƒCƒ“ƒXƒg[ƒ‹‚·‚éƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ªŽÀs‚µ‚Ä‚¢‚é‚©‚Ç‚¤‚©‚Ìƒ`ƒFƒbƒN
+(1) ƒCƒ“ƒXƒg[ƒ‹‚·‚éƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ªŽÀs‚³‚ê‚Ä‚¢‚é‚©‚Ç‚¤‚©‚Ìƒ`ƒFƒbƒN
 
 ƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ðƒAƒbƒvƒf[ƒg‚·‚é“™‚Ì——R‚ÅCŠù‚ÉƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ªƒCƒ“ƒXƒg[ƒ‹‚³‚ê‚Ä
 ‚¢‚é‚É‚àŠÖ‚í‚ç‚¸CÄ“xƒCƒ“ƒXƒg[ƒ‰‚ðŽÀs‚·‚éê‡‚ª‚ ‚è‚Ü‚·D‚»‚¤‚¢‚Á‚½ê‡‚ÉCƒCƒ“ƒXƒg[ƒ‰
